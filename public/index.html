@@ -29,18 +29,19 @@
       <li><a href="#tabs-3">3-ข้อมูลนิสิต</a></li>
     </ul>
     <div id="tabs-1">
+        <form id="my-form">
+            <input type="text" id="txtStudentID" name="txtStudentID" placeholder="รหัสนิสิต" />
+            <br/>
+            <input type="text" id="txtName" name="txtName" placeholder="ชื่อ-นามสกุล" />
+            <br/>
+            <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" />
+            <br/>
+            <input type="password" id="txtPassword" name="txtPassword" placeholder="รหัสผ่าน" />
+            <br/>
+            <input type="button" id="btnSubmit" value="Submit"/>
+        </form>
 
-    <form id="my-form">
-        <input type="text" id="txtStudentID" name="txtStudentID" placeholder="รหัสนิสิต" />
-        <br/>
-        <input type="text" id="txtName" name="txtName" placeholder="ชื่อ-นามสกุล" />
-        <br/>
-        <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" />
-        <br/>
-        <input type="password" id="txtPassword" name="txtPassword" placeholder="รหัสผ่าน" />
-        <br/>
-        <input type="button" id="btnSubmit" value="Submit"/>
-    </form>
+    
 
     
 
@@ -83,7 +84,7 @@
            headers: { 
              'Content-Type': 'application/json',
              "Accepts": "application/json",
-             "Authorization": "Bearer ",
+             "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90b29scy5lY3BlLm51LmFjLnRoXC9uZXR3b3JrXC9hcGlcL2xvZ2luIiwiaWF0IjoxNjU4ODMwNzQ1LCJleHAiOjE2NTg4MzQzNDUsIm5iZiI6MTY1ODgzMDc0NSwianRpIjoidmtCemlNQW9WZjlaejZETSIsInN1YiI6MjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.jx8nLc5lirCsKamE5b62OWb6syXLUVy64R3BXbKMWBw ",
            },
            success: function(data){
              console.log(data);
@@ -94,11 +95,33 @@
            }
          });
        });
+       //btnSubmit
+       $('#btnSubmit').click( function(){
+          //console.log("Submit");
+          $.ajax({
+            method: "POST",
+            url: "https://tools.ecpe.nu.ac.th/network/api/register",
+            dataType : 'json',
+            headers: { 
+              'Content-Type': 'application/json',
+              "Accepts": "application/json",
+            },
+            data:JSON.stringify( { "name": $('#txtName').val(), "student_id": $('#txtStudentID').val(), "email": $('#txtEmail').val(), "password": $('#txtPassword').val() } ),
+            success: function(data){
+              console.log(data);
+             
+            }
+          });
+
+        });
+
     });
 </script>
 
 
 <script type="text/javascript">
+    
+
 
     var TableBackgroundMouseoverColor = "#b8663d";
           function ChangeBackgroundColor(row) { row.style.backgroundColor = TableBackgroundMouseoverColor; }

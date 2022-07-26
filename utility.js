@@ -1,8 +1,8 @@
 //utility.js
 
 const request = require("request-promise");
-const EXTERNAL_API=""; // put url
-const accessToken=""; // put access token
+const EXTERNAL_API="https://tools.ecpe.nu.ac.th/network/api/student/"; // put url
+const accessToken="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90b29scy5lY3BlLm51LmFjLnRoXC9uZXR3b3JrXC9hcGlcL2xvZ2luIiwiaWF0IjoxNjU4ODMwNzQ1LCJleHAiOjE2NTg4MzQzNDUsIm5iZiI6MTY1ODgzMDc0NSwianRpIjoidmtCemlNQW9WZjlaejZETSIsInN1YiI6MjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.jx8nLc5lirCsKamE5b62OWb6syXLUVy64R3BXbKMWBw"; // put access token
 const student = {
   student_id: 63361696,
   name: 'Nachapon Norrarat', // replace with your full name.
@@ -15,14 +15,10 @@ const student = {
 exports.findStudentbyId = function (student_id, cb) {
   //-- call external api 
           request({
-            method: "POST",
-            uri: EXTERNAL_API,
+            method: "GET",
+            uri: EXTERNAL_API+student_id,
             headers: {
                 Authorization: `Bearer ${accessToken}`
-            },
-            formData: {
-                message: `HTTP Request :${data.student_id} `,
-                student_id: student_id
             }
         }).then((response) => {
             console.log('Sent');
